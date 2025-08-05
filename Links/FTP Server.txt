@@ -1,0 +1,12 @@
+FTP Explained - Cisco CCNA 200-301
+https://youtu.be/L9aZpg0ip70?si=qlaAh-qZNRHSkndo
+
+Wireshark Introduction
+https://youtu.be/qTaOZrDnMzQ?si=C_1wztG2k7Og0BJX
+
+Decoding FTP using Wireshark
+https://youtu.be/YNKq8DdKWQ8?si=jb0iC9Aj9PR5E-XD
+
+Official specification of the File Transfer Protocol (FTP).
+https://datatracker.ietf.org/doc/html/rfc959
+
