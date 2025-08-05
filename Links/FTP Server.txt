@@ -10,3 +10,5 @@ https://youtu.be/YNKq8DdKWQ8?si=jb0iC9Aj9PR5E-XD
 Official specification of the File Transfer Protocol (FTP).
 https://datatracker.ietf.org/doc/html/rfc959
 
+TCP Wikipedia
+https://en.wikipedia.org/wiki/Transmission_Control_Protocol?utm_source=chatgpt.com
