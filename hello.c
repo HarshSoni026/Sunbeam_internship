@@ -2,6 +2,6 @@
 
 int main(){
     printf("Hello_World\n");
-    printf("Branch Added\n");
+    printf("Branch\n");
     return 0;
 }
