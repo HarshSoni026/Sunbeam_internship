@@ -1,0 +1,15 @@
+HTTP Protocol
+
+HTTP stands for Hypertext transfer protocol
+It is a communication protocol used to transfer data over web.
+It works on client server architecture.
+It is a stateless protocol. (request-response protocol)
+Port used for HTTP is port no. 80 and and for HTTPS is port no. is 443.
+HTTPS is a secure version. It uses SSL/TLS encyption.
+
+
+HTTP Working:
+
+1. Client(browser) sends an HTTP request to a server.
+2. The server processes the request and send back an HTTP response.
+3.  
