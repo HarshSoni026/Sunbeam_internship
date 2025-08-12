@@ -12,3 +12,6 @@ https://datatracker.ietf.org/doc/html/rfc959
 
 TCP Wikipedia
 https://en.wikipedia.org/wiki/Transmission_Control_Protocol?utm_source=chatgpt.com
+
+Socket programming
+https://www.cs.dartmouth.edu/~campbell/cs50/socketprogramming.html?utm_source=chatgpt.com
