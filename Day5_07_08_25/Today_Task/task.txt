@@ -1,0 +1,2 @@
+Todays task:
+Modify the server to terminate connection if client sends "exit".
