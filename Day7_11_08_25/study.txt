@@ -3,3 +3,67 @@ How to read commands from a socket.
 How to tokenize and parse the command and parameters.
 FTP basics: common commands (USER, PASS, PWD).
 Structure of a modular command handler in C.
+
+ANSWER - 
+How to tokenize and parse the command and parameters.
+Tokenizing = breaking a string into smaller pieces (“tokens”) based on delimiters (spaces, commas, tabs, etc.).
+
+In our FTP example:
+
+Command = First token (USER)
+
+Parameter(s) = Remaining token(s) (admin)
+
+2️⃣ Tokenizing with strtok()
+strtok is the easiest built-in C function for tokenizing strings.
+
+Steps:
+
+Copy input string into a modifiable buffer (because strtok changes it).
+
+Call strtok(buffer, " \t") to get the first token (command).
+
+Call strtok(NULL, " \t") repeatedly to get the rest (parameters).
+
+💡 Tokenizing does not care what those tokens mean — it only separates them.
+
+Parse = 
+An FTP command parser simply means:
+
+A piece of code that reads FTP commands sent by a client (like USER, PASS, PWD, QUIT, etc.),
+understands what the command is,
+and extracts any parameters (like a username, file path, IP address).
+
+📌 In context of FTP
+When you connect to an FTP server, you send commands in plain text:
+| Example Command         | Meaning                                 | Parameter           |
+| ----------------------- | --------------------------------------- | ------------------- |
+| `USER admin`            | Set username to `admin`                 | `admin`             |
+| `PASS 1234`             | Set password to `1234`                  | `1234`              |
+| `PWD`                   | Print working directory                 | *(none)*            |
+| `CWD /folder/subfolder` | Change directory to `/folder/subfolder` | `/folder/subfolder` |
+| `PORT 192,168,0,1,21,5` | Tell server which IP/port to connect to | `192,168,0,1,21,5`  |
+
+Parsing = 
+Definition: Taking the tokens and understanding their meaning based on rules (grammar or protocol).
+
+Goal: Convert raw tokens into structured data that the program can use.
+
+Output: Structured representation, like:
+
+🛠 Why parsing is needed
+FTP commands are text-based and can have different formats.
+
+A parser turns the raw string into structured data the program can use.
+
+3️⃣ Analogy
+Think of tokenizing as cutting a sentence into words,
+and parsing as understanding the grammar of the sentence.
+
+📌 Example in English:
+Sentence: "Open the door"
+
+Tokenizing → ["Open", "the", "door"]
+
+Parsing → Verb = "Open", Object = "door"
+
