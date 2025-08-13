@@ -1,0 +1,106 @@
+FTP PROTOCOL
+*************************************************************************
+
+Ftp stands for File transfer protocol.
+It is a standard network protocol used for file transfer between a client and server over a TCP/IP network.
+FTP helps us to encourage the use of remote computers.
+Default Control Port: 21
+Default Data Port: 20 (in Active mode)
+Protocol Type: Stateful (keeps connection open until the session ends)
+Transport Layer: Uses TCP (reliable delivery)
+
+
+FTP Working:
+============
+
+The client initiates a request to the server, targeting port 21, the control port, also known as the command channel.
+The server acknowledges the request, and the client may be required to provide authentication details such as a username and password. 
+The control connection remains open throughout the session to facilitate the exchange of commands and responses between the client and server. 
+The data connection, dedicated solely to transferring the actual file data, uses port 20 by default.
+When a file transfer request is made, the data connection is established between the client and the server, either in active or passive mode.
+Once both control and data connections are established, the client can use FTP commands to manage and transfer files.
+FTP supports various data types like ASCII, EBCDIC, or image files for efficient transfer between systems with different structures.
+FTP employs different transfer modes like stream, block, and compressed to manage data flow. 
+After the file transfer is complete, the client can terminate the session.
+
+
+ ___Steps:___
+ 
+1. Connection Establishment:
+FTP uses two separate TCP connections,
+Control Connection (Port 21) → For sending commands like USER, PASS, LIST, etc.
+Data Connection (Port 20 in Active mode, or random port in Passive mode) → For actual file transfer.
+
+2. Authentication:
+The client sends Usename and Password
+The server verifies credentials.
+Some servers allow Anonymous FTP (public access without login).
+
+3. Command Exchange
+Client sends commands,
+List directories (LIST)
+Change directories (CWD)
+Download files (RETR)
+Upload files (STOR)
+
+4. File Transfer
+Data connection is used to send or receive file content.
+Transfer modes:
+ASCII mode → For text files
+Binary mode → For images, videos, executables
+
+5. Closing the Connection
+
+
+FTP Methods:
+============
+
+USER	Send username for login
+PASS	Send password for login
+QUIT	End the FTP session
+LIST	List files and directories in the current folder
+PWD	Print Working Directory (shows current folder path)
+CWD	Change Working Directory
+MKD	Make Directory
+RMD	Remove Directory
+DELE	Delete a file
+RETR	Retrieve (download) a file from the server
+STOR	Store (upload) a file to the server
+APPE	Append data to an existing file on the server
+TYPE	Set transfer type (ASCII or Binary)
+PORT	Specify the client-side port for Active mode data transfer
+PASV	Request Passive mode data connection
+NOOP	No operation (keep the connection alive)
+ABOR	Abort current file transfer
+SYST	Get server’s operating system type
+HELP	Get list of supported FTP commands
+
+
+FTP status code:
+
+200 – Command OK
+220 – Service ready for new user (initial connection message)
+221 – Service closing control connection (after QUIT)
+226 – Closing data connection, file action successful
+230 – User logged in successfully
+250 – Requested file action completed
+331 – Username OK, need password
+332 – Need account for login
+350 – Requested file action pending further information
+421 – Service not available, closing control connection
+425 – Can’t open data connection
+426 – Connection closed; transfer aborted
+450 – Requested file action not taken (e.g., file busy)
+452 – Insufficient storage space
+500 – Syntax error, command not recognized
+501 – Syntax error in parameters or arguments
+530 – Not logged in (invalid username/password)
+550 – Requested action not taken (e.g., file not found, no access)
+553 – File name not allowed
+
+
+
+
+
+
+

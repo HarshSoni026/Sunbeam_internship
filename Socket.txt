@@ -1,0 +1,137 @@
+SOCKET
+*************************************************************************************************
+
+What is socket?
+================
+
+Socket is deﬁned as communication endpoint.
+Sockets can be used for bi-directional communication.
+Using socket one process can communicate with another process on same machine (UNIX socket) or diﬀerent machine (INET sockets) in the network.
+Sockets can also be used for communication over bluetooth, CAN, etc.
+terminal> man 7 socket
+
+What Is Socket Programming?
+============================
+
+Think of two people talking on the phone.
+One person is the server: they wait for calls.
+The other is the client: they make the call.
+The phone line is like the socket — it connects them.
+
+Socket System Calls:
+fd = socket(addr_family, sock_type, protocol);
+arg1: addr_family = AF_UNIX or AF_INET
+arg2: sock_type = SOCK_STREAM or SOCK_DGRAM
+arg3: protocol = 0
+
+Socket information is maintained in struct sockaddr. It will diﬀer for each address family.
+struct sockaddr
+    sa_family -- address family (AF_UNIX or AF_INET)
+struct sockaddr_un
+    sun_family -- address family = AF_UNIX
+    sun_path -- UNIX socket ﬁle path
+struct sockaddr_in
+    sin_family -- address family = AF_INET
+    sin_port -- port number in big endian format
+    sin_addr -- struct in_addr -- ip address in big endian format
+ret = bind(fd, &sock_addr, sock_length)
+    arg1: socket fd (created by socket() call)
+    arg2: address of sockaddr_un or sockaddr_in
+    arg3: sizeof(sockaddr_un) or sizeof(sockaddr_in)
+    returns 0 on success.
+ret = connect(fd, &sock_addr, sock_length)
+    arg1: socket fd (created by socket() call)
+    arg2: address of sockaddr_un or sockaddr_in
+    arg3: sizeof(sockaddr_un) or sizeof(sockaddr_in)
+    returns 0 on success.
+cli_fd = accept(fd, &sock_addr, &sock_length)
+    arg1: socket fd (created by socket() call)
+    arg2: (out-param) address of sockaddr_un or sockaddr_in
+    arg3: (in-out param) sizeof(sockaddr_un) or sizeof(sockaddr_in)
+    returns 0 on success.
+listen(fd, pending);
+    arg1: socket fd (created by socket() call)
+    arg2: max pending socket conection requests
+shutdown(fd, SHUT_RDWR);
+    arg1: socket fd (created by socket() call)
+    arg2: which connections to be closed -- SHUT_RDWR.
+
+Term	Meaning:
+IP Address	Like your home address on the internet (e.g., 192.168.1.1)
+Port	Like a door number at your home (e.g., 8080)
+Server	A program that waits for requests (e.g., a restaurant)
+Client	A program that sends a request (e.g., a customer)
+Socket	A connection pipe between client and server
+
+Daigram:
+┌────────────┐           Socket (Connection)          ┌────────────┐
+│  Server    │ <------------------------------------> │  Client    │
+│ Listens on │         ↔ messages back & forth ↔      │ Sends msg  │
+│  port 8080 │                                        │ Receives   │
+└────────────┘                                        └────────────┘
+
+Now Break Down Socket Programming into 5 Steps (Just Concepts)
+Step	What You Do	Example
+1	Create a socket	“Plug in the phone”
+2	Bind to IP & Port	“Give the phone a number”
+3	Listen	“Wait for a call”
+4	Accept	“Pick up the phone when someone calls”
+5	Communicate	“Talk: Send/Receive message”
+
+Server Side:
+-------------
+1. socket()
+2. bind()
+3. listen()
+4. accept()
+5. recv() / send()
+6. close()
+
+Client Side:
+-------------
+1. socket()
+2. connect()
+3. send() / recv()
+4. close()
+
+C Functions:
+Function	What It Does
+socket()	Creates a socket
+bind()	    Assigns IP address & port to the socket
+listen()	Waits for clients
+accept()	Accepts client connection
+recv()	    Receives message from client
+send()	    Sends message to client
+close()	    Closes the socket
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
