@@ -1,0 +1,4 @@
+Task 1 – Filter only files or only directories
+Hint: Use dir->d_type:
+
+Task 2 – Accept directory path as command-line argument
