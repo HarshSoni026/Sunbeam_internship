@@ -6,7 +6,7 @@ int main(int argc,char *argv[])
     DIR *d;
     struct dirent *dir;
 
-    d = opendir(argv[1]);
+    d = opendir(argv[1]); //Task 2 – Accept directory path as command-line argument
     if(!d)
         perror("opendir");
 
