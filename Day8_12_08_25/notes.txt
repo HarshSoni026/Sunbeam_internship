@@ -1,0 +1,74 @@
+NAME
+       opendir, fdopendir - open a directory
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <dirent.h>
+
+       DIR *opendir(const char *name);
+
+DESCRIPTION
+       The opendir() function opens a directory stream corresponding to the directory name, and returns a pointer to the directory stream.
+       The stream is positioned at the first entry in the directory.
+
+NAME
+       readdir - read a directory
+
+SYNOPSIS
+       #include <dirent.h>
+
+       struct dirent *readdir(DIR *dirp);
+
+DESCRIPTION
+       The  readdir()  function  returns  a  pointer  to  a dirent structure representing the next directory entry in the directory stream
+       pointed to by dirp.  It returns NULL on reaching the end of the directory stream or if an error occurred.
+
+       d_type - This field contains a value indicating the file type, making it possible to avoid the expense of calling lstat(2) if further
+       actions depend on the type of the file.
+
+
+NAME
+       closedir - close a directory
+
+SYNOPSIS
+       #include <sys/types.h>
+
+       #include <dirent.h>
+
+       int closedir(DIR *dirp);
+
+DESCRIPTION
+       The closedir() function closes the directory stream associated with dirp.  A successful call to closedir() also closes the underly‐
+       ing file descriptor associated with dirp.  The directory stream descriptor dirp is not available after this call.
+
+RETURN VALUE
+       The closedir() function returns 0 on success.  On error, -1 is returned, and errno is set appropriately.
+
+## Here’s a visual diagram showing how d_name works inside struct dirent when you use opendir(), readdir(), and closedir().
+
+           ┌─────────────────────────────┐
+           │ opendir("myfolder")          │
+           │  → returns DIR *dir          │
+           └───────────────┬─────────────┘
+                           │
+                ┌──────────▼──────────┐
+                │ readdir(dir)        │
+                │ returns:             │
+                │ struct dirent *entry │
+                └──────────┬──────────┘
+                           │
+        ┌──────────────────▼──────────────────┐
+        │ struct dirent                        │
+        │ ┌───────────────┐                    │
+        │ │ d_ino         │ inode number       │
+        │ │ d_off         │ offset in dir      │
+        │ │ d_reclen      │ record length      │
+        │ │ d_type        │ file type code     │
+        │ │ d_name[]      │ "filename.txt" ←───┼───  Actual file name (no path)
+        │ └───────────────┘                    │
+        └─────────────────────────────────────┘
+                           │
+           ┌───────────────▼───────────────┐
+           │ printf("%s", entry->d_name);   │
+           │ → Output: filename only        │
+           └───────────────────────────────┘
