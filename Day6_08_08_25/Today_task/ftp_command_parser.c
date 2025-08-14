@@ -21,7 +21,7 @@ int main() {
     char input[128];
     printf("Enter FTP command: ");
     fgets(input, sizeof(input), stdin);
-    //cspn meaning in c This line removes the trailing newline from a string read by fgets.
+    //strcspn meaning in c This line removes the trailing newline from a string read by fgets.
     input[strcspn(input, "\n")] = 0; 
     handle_command(input);
     return 0;
