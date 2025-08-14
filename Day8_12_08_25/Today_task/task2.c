@@ -7,7 +7,7 @@
 #include <arpa/inet.h>
 #include <dirent.h>   // For directory listing functions
 
-#define PORT    8080
+#define PORT    8081
 #define IP      "127.0.0.1"
 
 void send_directory_listing(int client_fd) {

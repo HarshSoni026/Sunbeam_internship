@@ -1,0 +1,5 @@
+Today's Study points:
+How to read commands from a socket.
+How to tokenize and parse the command and parameters.
+FTP basics: common commands (USER, PASS, PWD).
+Structure of a modular command handler in C.

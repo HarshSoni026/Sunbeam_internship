@@ -6,7 +6,6 @@ int main() {
     char input[128];
     printf("Enter FTP command: ");
     fgets(input, sizeof(input), stdin);
-    input[strcspn(input,"\n")];
 
     //strcspn meaning in c This line removes the trailing newline from a string read by fgets.
     input[strcspn(input, "\n")] = 0; 
@@ -24,3 +23,17 @@ int main() {
 
     return 0;
 }
+
+/*
+command = strtok(input, " ");
+
+strtok() takes the string input and splits it using " " (space) as a delimiter.
+
+It returns the first token (before the first space).
+
+command = strtok(input, " ");
+
+strtok() takes the string input and splits it using " " (space) as a delimiter.
+
+It returns the first token (before the first space).
+*/
