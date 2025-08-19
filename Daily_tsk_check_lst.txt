@@ -1,0 +1,49 @@
+Date:- 06/08/25
+Task 1:- Modify the server to print client messages on the server terminal.                          - Done
+Task 2:- Modify the server to send a welcome message to the client immediately after connection.     - Done   
+(Hint :- use write() and accept())
+
+Date:- 07/08/25
+Task 3:- Modify the server to terminate connection if client sends "exit".                           - Done
+
+Date:- 08/08/25
+Today's Study points:
+How to read commands from a socket.                                                                  - Done
+How to tokenize and parse the command and parameters.                                                - Done
+FTP basics: common commands (USER, PASS, PWD).                                                       - Done
+Structure of a modular command handler in C.                                                         - Done
+
+Task 1.                                                                                              - Done
+Add case-insensitive command matching.                                                               
+Example: user or UsEr should still match USER.                              
+Use strcasecmp() for comparison.                                        
+
+Task 2.                                                                                              - Done
+Extract and print only the command arguments (parameters).
+Example:
+Input: USER admin → Output: Command=USER, Argument=admin.
+
+Task 3.                                                                                              - Done
+Store received commands in a history log (in-memory array).
+Example: Store last 5 commands and print them on request.
+
+Date:- 12/08/25
+Today's task:
+- Read opendir(), readdir(), closedir() from <dirent.h>.                                             - Done
+- How directory listing is used in FTP’s LIST command.                                               - Done
+
+Task 1 – Filter only files or only directories                                                       - Done
+Hint: Use dir->d_type:
+
+Task 2 – Accept directory path as command-line argument                                              - Done
+
+Date:- 18/08/25
+Task 1 – File not found handling
+Modify the program so that if the requested file does not exist, the server sends an error message like:
+"550 File not found"
+
+Task 2 – Send file name dynamically
+Instead of always sending file.txt, take the file name from client command or command-line argument.
+
+Task 3 – Verify transfer by client
+On the client side (e.g. using telnet or a custom C client), save the received data into a file and compare with the original using.

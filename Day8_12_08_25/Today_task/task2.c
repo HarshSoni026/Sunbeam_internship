@@ -15,7 +15,7 @@ void send_directory_listing(int client_fd) {
     struct dirent *dir;
     char file_list[2048] = "";  // Buffer to store file names
 
-    d = opendir("/home/harsh/0324desd/Internship");  // Current directory
+    d = opendir("/home/harsh/0324desd/Internship");  
     if (d) {
         while ((dir = readdir(d)) != NULL) {
             strcat(file_list, dir->d_name);
