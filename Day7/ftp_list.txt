@@ -1,0 +1,50 @@
+LIST command in FTP
+***************************************************************
+
+
+The FTP (File Transfer Protocol) LIST command is a fundamental part of how you browse the files and folders on a remote server using FTP. Here's a breakdown of how it works:
+
+=================================================================================
+
+Client initiates the LIST command: 
+-----------------------------------
+When you, as a client, want to see the contents of a directory on an FTP server, you send the LIST command (or the synonymous dir command). For example, ftp> LIST /path/to/directory.
+Server processes the LIST command, Upon receiving the LIST command, the FTP server performs the following actions:
+
+Opens the specified directory: 
+--------------------------------
+It uses system calls like opendir() to open the requested directory on its local file system, creating a directory stream.
+
+Iterates through directory entries: 
+------------------------------------
+It then uses readdir() in a loop to read each entry within the directory stream, retrieving information about each file and subdirectory.
+
+Formats the information: 
+-------------------------
+The server compiles the extracted information (filenames, permissions, sizes, dates, etc.) into a textual listing format, often resembling the output of the ls -l command on Unix-like systems.
+
+Sends the listing over a data connection:
+------------------------------------------
+The server sends the formatted directory listing back to the client over a separate data connection, which is typically established in either active or passive mode, depending on the client and server configuration.
+
+Client receives and displays the listing: 
+------------------------------------------
+The FTP client receives the listing and displays it on the client's screen, allowing you to see the directory's contents and navigate the server's file system. 
+Key aspects
+
+Data connection: 
+-----------------
+It's important to remember that the LIST command uses a separate data connection to transfer the listing information, distinct from the control connection used for issuing commands and receiving basic responses.
+
+Variable formats: 
+------------------
+While the basic functionality is standard, the exact format of the directory listing output can vary slightly depending on the operating system and implementation of the FTP server.
+
+==========================================================================
+
+Alternatives: 
+---------------
+-Some FTP clients may use the NLST command, which returns only the filenames without the additional details, according to SFTPCloud.io. -Newer FTP servers might also support the MLSD command, which provides a more standardized and machine-readable format for directory listings, according to SolarWinds. 
+
+
+

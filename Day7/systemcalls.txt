@@ -1,0 +1,73 @@
+In C programming, the functions opendir(), readdir(), and closedir() are used for accessing and iterating through the contents of a directory. They are defined in the <dirent.h> header file.
+
+
+1. opendir():
+=============
+Purpose: The opendir() function opens a directory stream, which acts as a pointer or handle to the specified directory, allowing you to access its contents.
+
+Syntax: 
+*************************************
+#include <dirent.h> 
+DIR *opendir(const char *dirname);
+*************************************
+
+Parameters:
+------------
+dirname: A string representing the path to the directory you want to open.
+Return Value:
+On success, opendir() returns a pointer to a DIR object (directory stream), which is used by subsequent calls to readdir().
+On failure, it returns NULL and sets errno to indicate the specific error. 
+(e.g., ENOENT if the directory doesn't exist, EACCES if permissions are denied). 
+
+
+2. readdir():
+==============
+Purpose: The readdir() function reads the next entry (file or subdirectory) from an open directory stream.
+
+Syntax: 
+************************************
+#include <dirent.h> 
+struct dirent *readdir(DIR *dirp);
+************************************
+
+Parameters:
+------------
+
+dirp: A pointer to a DIR object previously returned by opendir().
+Return Value:
+On success, readdir() returns a pointer to a struct dirent object, which contains information about the next directory entry. This structure includes members like d_name (filename) and d_ino (inode number).
+Returns NULL upon reaching the end of the directory stream or if an error occurs.
+Important: The pointer returned by readdir() typically points to a static memory buffer that gets overwritten with each subsequent call to readdir() on the same directory stream. If you need to preserve the data, you should make a copy of it.
+Error Handling: To distinguish between the end of the directory stream and an error, you can set errno to 0 before calling readdir() and then check errno if NULL is returned. 
+
+
+3. closedir():
+===============
+Purpose: The closedir() function closes an open directory stream and frees the associated resources.
+
+Syntax: 
+***************************
+#include <dirent.h> 
+int closedir(DIR *dirp);
+***************************
+
+Parameters:
+------------
+dirp: A pointer to the DIR object (directory stream) to be closed.
+Return Value:
+Returns 0 on successful completion.
+Returns -1 on error and sets errno. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
