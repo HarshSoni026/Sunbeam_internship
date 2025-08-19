@@ -1,0 +1,25 @@
+            SERVER SIDE                                  CLIENT SIDE
+  ────────────────────────────                   ──────────────────────────
+
+  socket() → server_fd
+       │
+       ▼
+  bind(server_fd, IP:PORT)                       socket() → client_fd
+       │                                               │
+       ▼                                               ▼
+  listen(server_fd)                             connect(client_fd, server_IP, PORT)
+       │                                               │
+       ▼                                               │
+  ┌──────────── Waiting ────────────┐                  │
+  │  Incoming client connection     │                  │
+  └─────────────────────────────────┘                  │
+       │                                               │
+       ▼                                               │
+  accept(server_fd, ...)   <───────────── connection ──┘
+       │
+       ▼
+   returns **client_fd**
+       │
+       ▼
+  use client_fd for read()/write()
+  (one client connection)
