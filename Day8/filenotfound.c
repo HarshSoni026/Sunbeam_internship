@@ -1,5 +1,5 @@
-#include <stdio.h>              // For input/output functions like printf, perror
-#include <stdlib.h>             // For exit() and general utilities
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>             // For memset(), strlen()
 #include <unistd.h>             // For close(), write(), read()
 #include <sys/socket.h>         // For socket(), bind(), listen(), accept(), recv()
