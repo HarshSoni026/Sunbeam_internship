@@ -39,18 +39,19 @@ int main() {
         printf("Server: %s\n", buffer);
     }
 
-    // Ask user for filename
-    printf("Enter filename to request: ");
-    scanf("%s", filename);
+    while(1){
+        // Ask user for filename
+        printf("Enter filename to request: ");
+        scanf("%s", filename);
 
-    // Send filename
-    send(client_fd, filename, strlen(filename), 0);
-    send(client_fd, "\n", 1, 0); // send newline like telnet does
+        // Send filename
+        send(client_fd, filename, strlen(filename), 0);
+        send(client_fd, "\n", 1, 0); // send newline like telnet does
 
-    // Receive response
-    FILE *fp = NULL;
-    char save_as[300];
-    snprintf(save_as, sizeof(save_as), "received_%s", filename);
+        // Receive response
+        FILE *fp = NULL;
+        char save_as[300];
+        snprintf(save_as, sizeof(save_as), "received_%s", filename);
 
     while ((n = recv(client_fd, buffer, sizeof(buffer), 0)) > 0) {
         buffer[n] = '\0';
@@ -79,6 +80,7 @@ int main() {
         fclose(fp);
         printf("File download completed.\n");
     }
+}
 
     close(client_fd);
     return 0;

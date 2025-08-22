@@ -57,24 +57,48 @@ int main()
 
     // Send welcome message
     char *welcome_msg = "Welcome to the server\r\n";
-    if(write(client_fd,welcome_msg,strlen(welcome_msg))<0){
-        perror("Write to client failed!");
-    }
+    write(client_fd,welcome_msg,strlen(welcome_msg));
+
+    //if(write(client_fd,welcome_msg,strlen(welcome_msg))<0)
+    // {
+    //     perror("Write to client failed!");
+    // }
 
     // Receive filename from client
-    memset(buffer, 0, sizeof(buffer));
-    int bytes = recv(client_fd, buffer, sizeof(buffer)-1, 0);
-    if (bytes <= 0) {
-        printf("No filename received. Closing connection.\n");
-        close(client_fd);
-        close(server_fd);
-        return 0;
-    }
-    buffer[bytes] = '\0';
+    // memset(buffer, 0, sizeof(buffer));
+    // int bytes = recv(client_fd, buffer, sizeof(buffer)-1, 0);
+    // if (bytes <= 0) {
+    //     printf("No filename received. Closing connection.\n");
+    //     close(client_fd);
+    //     close(server_fd);
+    //     return 0;
+    // }
+    // buffer[bytes] = '\0';
 
+    while (1){
+        memset(buffer, 0, sizeof(buffer));
+        int bytes = recv(client_fd, buffer, sizeof(buffer)-1, 0);
+
+        if(bytes <= 0) {
+            printf("Client Disconnected. \n");
+            break;
+        }
+
+        buffer[bytes] = '\0';
+        buffer[strcspn(buffer, "\r\n")] = '\0';
     
-    buffer[strcspn(buffer, "\r\n")] = '\0';
+        // Ignore empty input caused by extra newline
+        if(strlen(buffer) == 0){
+            continue;
+        }
+    
     printf("Client requested file: %s\n", buffer);
+
+    // Check for quit command
+        if (strcmp(buffer, "quit") == 0) {
+            printf("Client requested disconnect.\n");
+            break;
+        }
 
     // Try to open requested file
     FILE *fp = fopen(buffer, "rb");
@@ -96,6 +120,7 @@ int main()
         fclose(fp);
         printf("File transfer completed: %s\n", buffer);
     }
+}
 
     close(client_fd);
     close(server_fd);
