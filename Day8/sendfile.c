@@ -3,7 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
-
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 8080
 
@@ -53,7 +52,7 @@ int main() {
         char save_as[300];
         snprintf(save_as, sizeof(save_as), "received_%s", filename);
 
-    while ((n = recv(client_fd, buffer, sizeof(buffer), 0)) > 0) {
+        while ((n = recv(client_fd, buffer, sizeof(buffer), 0)) > 0) {
         buffer[n] = '\0';
 
         // Check for error message
@@ -76,11 +75,15 @@ int main() {
         fwrite(buffer, 1, n, fp);
     }
 
-    if (fp != NULL) {
+        if (fp != NULL) {
         fclose(fp);
         printf("File download completed.\n");
     }
-}
+         if (n == 0){
+            break;
+    }
+
+    }
 
     close(client_fd);
     return 0;
