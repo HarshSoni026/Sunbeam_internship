@@ -6,7 +6,7 @@
 #include <netinet/in.h>         // For sockaddr_in and IP-related constants
 #include <arpa/inet.h>          // For inet_ntop() to convert IP to readable form
 
-#define PORT    8080
+#define PORT    8081
 #define IP      "127.0.0.1"
 
 int main()
@@ -42,7 +42,7 @@ int main()
     }
 
     listen(server_fd,5);
-    printf("Server listening on Port 8080...\n");
+    printf("Server listening on Port :%d\n",PORT);
 
     addr_size = sizeof(client_addr);
     client_fd = accept(server_fd,(struct sockaddr*)&client_addr,&addr_size);
@@ -82,7 +82,7 @@ int main()
         // Task 1 – File not found handling
         char *error_msg = "550 File not found\r\n";
         send(client_fd, error_msg, strlen(error_msg), 0);
-        printf("File not found: %s\n", buffer);
+        //printf("File not found: %s\n", buffer);
     } else {
         // Send file contents
         char file_buf[1024];
