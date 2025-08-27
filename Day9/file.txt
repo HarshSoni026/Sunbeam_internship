@@ -1,0 +1,21 @@
+Task 1: Basic Testing
+- Run the server and connect via telnet or nc.
+- Use: STOR test1.txt
+- Type some lines, end with '.'
+- Verify that the file 'test1.txt' is created.
+
+Task 2: Multiple Uploads
+- Try uploading two files in the same session:
+  STOR file1.txt
+  (type some text, then '.')
+  STOR file2.txt
+  (type some text, then '.')
+- Verify both files are created.
+
+Task 3: Error Handling
+- Try 'STOR' without a filename → observe server response.
+- Try 'RANDOMCMD abc' → server should respond with '500 Unknown command'.
+
+Task 4: File Append (Bonus Challenge)
+- Modify the code so if the command is 'APPE filename', it appends to the file instead of overwriting.
+- Hint: Use O_APPEND flag when opening the file.
