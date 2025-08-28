@@ -38,12 +38,35 @@ Hint: Use dir->d_type:
 Task 2 – Accept directory path as command-line argument                                              - Done
 
 Date:- 18/08/25
-Task 1 – File not found handling
-Modify the program so that if the requested file does not exist, the server sends an error message like:
+Task 1 – File not found handling                                                                     - Done               
+Modify the program so that if the requested file does not exist, the server sends an error message like: 
 "550 File not found"
 
-Task 2 – Send file name dynamically
+Task 2 – Send file name dynamically                                                                  - Done
 Instead of always sending file.txt, take the file name from client command or command-line argument.
 
-Task 3 – Verify transfer by client
+Task 3 – Verify transfer by client                                                                   - Done
 On the client side (e.g. using telnet or a custom C client), save the received data into a file and compare with the original using.
+
+Date:- 25/08/25
+Task 1: Basic Testing                                                                                - Done
+- Run the server and connect via telnet or nc.
+- Use: STOR test1.txt
+- Type some lines, end with '.'
+- Verify that the file 'test1.txt' is created.
+
+Task 2: Multiple Uploads                                                                             - Done
+- Try uploading two files in the same session:
+  STOR file1.txt
+  (type some text, then '.')
+  STOR file2.txt
+  (type some text, then '.')
+- Verify both files are created.
+
+Task 3: Error Handling
+- Try 'STOR' without a filename → observe server response.
+- Try 'RANDOMCMD abc' → server should respond with '500 Unknown command'.
+
+Task 4: File Append (Bonus Challenge)
+- Modify the code so if the command is 'APPE filename', it appends to the file instead of overwriting.
+- Hint: Use O_APPEND flag when opening the file.
