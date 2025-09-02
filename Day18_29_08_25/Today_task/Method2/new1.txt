@@ -1,0 +1,4 @@
+
+FTP, or File Transfer Protocol, is a standard network protocol used to transfer files between a client and a server on a network, like the internet.
+
+hello bacchho.

@@ -1,0 +1,4 @@
+
+What does sscanf do?
+
+The sscanf() function reads formatted data from a string (rather than from standard input, as scanf() does) and stores the extracted values into provided variables.

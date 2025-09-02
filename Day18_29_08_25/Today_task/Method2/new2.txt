@@ -1,0 +1,4 @@
+
+Socket programming is a method of establishing communication between two programs over a network, whether they are on the same machine or different machines. It utilizes "sockets," which are endpoints for sending and receiving data across a network.
+
+TCP (Transmission Control Protocol) is a core internet communication standard that provides reliable, ordered, and error-checked delivery of data between computing devices over a network. 
