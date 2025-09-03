@@ -73,14 +73,9 @@ int main(void){
 
     client_fd = accept(server_fd, (struct sockaddr*)&client_addr, &addr_size);
 
-    if(client_fd < 0){
-        perror("accept failed");
-        close(server_fd);
-        exit(EXIT_FAILURE);
-    }
+   
 
-    inet_ntop(AF_INET, &client_addr.sin_addr, IP, sizeof(IP));
-
+    inet_ntop(AF_INET, &client_addr.sin_addr, client_ip, sizeof(client_ip));
     printf("connected to client ip: %s:%d\n", client_ip, ntohs(client_addr.sin_port));
 
     char *welcome_msg = "Welcome to the server\n";
