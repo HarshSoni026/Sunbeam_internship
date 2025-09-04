@@ -19,7 +19,7 @@ void send_directory_listing(int client_fd) {
     struct dirent *dir;
     char file_list[2048] = "";  // Buffer to store file names
 
-    d = opendir("/home/sayli/Sunbeam_internship/Day7");  // Current directory
+    d = opendir("/home/sayli/Sunbeam_internship/Day7");  // path to view the files and directories in that directory.
     if (d) {
         while ((dir = readdir(d)) != NULL) {
             strcat(file_list, dir->d_name);
