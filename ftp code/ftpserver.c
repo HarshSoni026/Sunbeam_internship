@@ -23,15 +23,22 @@ int main() {
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd < 0) {
         perror("Socket creation failed");
-        //exit(1);
-        exit(0);
+        exit(1);
+        //exit(0);
     }
 
     // Configure server address
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(PORT);
-    //server_addr.sin_addr.s_addr = INADDR_ANY;
-    
+    server_addr.sin_addr.s_addr = INADDR_ANY;
+    //server_addr.sin_addr.s_addr = inet_addr(IP);
+
+    // Reuse port immediately after close()
+    int opt = 1;
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
+        perror("setsockopt");
+        exit(EXIT_FAILURE);
+
 
     // Bind socket
     if (bind(server_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
@@ -47,9 +54,10 @@ int main() {
         exit(1);
     }
 
-    printf("FTP Server running on port %d...\n", PORT);
+    printf("FTP Server listening on port 8080...\n");
 
     // Accept client connection
+    addr_size = sizeof(client_addr);
     client_fd = accept(server_fd, (struct sockaddr*)&client_addr, &addr_len);
     if (client_fd < 0) {
         perror("Accept failed");
