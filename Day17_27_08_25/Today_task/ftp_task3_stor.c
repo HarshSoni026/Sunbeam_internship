@@ -41,6 +41,7 @@ int main() {
         } 
         else if (strncmp(buffer, "STOR", 4) == 0) {
             char filename[100];
+            //  Task 3 - Try 'STOR' without a filename
             if (sscanf(buffer, "STOR %s", filename) != 1) {
                 write(client_fd, "501 Syntax error\r\n", 19);
                 continue;
@@ -65,6 +66,7 @@ int main() {
             write(client_fd, "221 Goodbye\r\n", 13);
             break;
         } 
+        // Task 3 - Custom error handling RANDOMCMD abc' → server should respond with '500 Unknown command'.
         else if(strncmp(buffer,"RANDOMCMD", 9) == 0){
             write(client_fd, "500 Unknown command\r\n", 22);
         }

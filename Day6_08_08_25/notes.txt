@@ -1,0 +1,4 @@
+strcasecmp():-
+The strcasecmp function in C performs a case-insensitive comparison of two null-terminated strings. 
+It is typically declared in the <strings.h> header file, although some systems may include it in <string.h>.
+
