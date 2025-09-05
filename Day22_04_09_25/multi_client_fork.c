@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <dirent.h>
 
 #define PORT 8081
 #define BUF_SIZE 1024
@@ -25,7 +26,6 @@ void send_file(int client_fd, const char *filename) {
     snprintf(okmsg, sizeof(okmsg), "150 Opening data connection for %s\r\n", filename);
     write(client_fd, okmsg, strlen(okmsg));
 
-    // send file contents
     while ((n = fread(buffer, 1, sizeof(buffer), fp)) > 0) {
         write(client_fd, buffer, n);
     }
@@ -34,6 +34,63 @@ void send_file(int client_fd, const char *filename) {
 
     char *done = "226 Transfer complete\r\n";
     write(client_fd, done, strlen(done));
+}
+
+void list_files(int client_fd) {
+    DIR *d;
+    struct dirent *dir;
+    char buffer[BUF_SIZE];
+
+    d = opendir(".");
+    if (!d) {
+        char *err = "550 Failed to open directory\r\n";
+        write(client_fd, err, strlen(err));
+        return;
+    }
+
+    write(client_fd, "150 Here comes the directory listing\r\n", 38);
+
+    while ((dir = readdir(d)) != NULL) {
+        if (strcmp(dir->d_name, ".") == 0 || strcmp(dir->d_name, "..") == 0)
+            continue;
+        snprintf(buffer, sizeof(buffer), "%s\r\n", dir->d_name);
+        write(client_fd, buffer, strlen(buffer));
+    }
+
+    closedir(d);
+    write(client_fd, "226 Directory send OK\r\n", 24);
+}
+
+void store_file(int client_fd, const char *filename) {
+    if (!filename || strlen(filename) == 0) {
+        write(client_fd, "501 Syntax error in parameters\r\n", 32);
+        return;
+    }
+
+    FILE *fp = fopen(filename, "w");
+    if (!fp) {
+        write(client_fd, "550 Cannot create file\r\n", 25);
+        return;
+    }
+
+    char buffer[BUF_SIZE];
+    int n;
+
+    write(client_fd, "150 Ready to receive data. End with '.' on a line\r\n", 50);
+
+    while ((n = read(client_fd, buffer, BUF_SIZE - 1)) > 0) {
+        buffer[n] = '\0';
+        buffer[strcspn(buffer, "\r\n")] = 0; // remove CRLF
+
+        if (strcmp(buffer, ".") == 0) {
+            break; // End of file data
+        }
+
+        fprintf(fp, "%s\n", buffer);
+    }
+
+    fclose(fp);
+    write(client_fd, "226 File upload complete\r\n", 27);
 }
 
 void handle_client(int client_fd) {
@@ -45,38 +102,56 @@ void handle_client(int client_fd) {
 
     while ((n = read(client_fd, buffer, BUF_SIZE - 1)) > 0) {
         buffer[n] = '\0';
-        buffer[strcspn(buffer, "\r\n")] = 0; // remove newline
+        buffer[strcspn(buffer, "\r\n")] = 0;
 
-        // Check for quit command
+        // ---- QUIT ----
         if (strcasecmp(buffer, "quit") == 0) {
             char bye_msg[BUF_SIZE];
             snprintf(bye_msg, sizeof(bye_msg), "[PID %d] Goodbye!\n", child_pid);
             write(client_fd, bye_msg, strlen(bye_msg));
-            break;  // exit the loop, close socket
+            break;
         }
 
-        if (strncasecmp(buffer, "RETR ", 5) == 0) {
+        // ---- RETR filename ----
+        else if (strncasecmp(buffer, "RETR ", 5) == 0) {
             char *filename = buffer + 5;
             send_file(client_fd, filename);
-        } 
+        }
+
+        // ---- LIST ----
+        else if (strcasecmp(buffer, "LIST") == 0) {
+            list_files(client_fd);
+        }
+
+        // ---- STOR filename ----
+        else if (strncasecmp(buffer, "STOR", 4) == 0) {
+            char *filename = buffer + 4;   // point just after "STOR"
+            while (*filename == ' ') filename++; // skip spaces
+
+            if (*filename == '\0') {
+            // no filename provided
+            write(client_fd, "501 Syntax error in parameters\r\n", 32);
+    } 
+    else {
+        store_file(client_fd, filename);
+    }
+}
+
+
+        // ---- Unknown Command ----
         else {
             char msg[BUF_SIZE];
-            snprintf(msg, sizeof(msg), "502 Command not implemented: %s\r\n", buffer);
+            snprintf(msg, sizeof(msg), "500 Unknown command: %s\r\n", buffer);
             write(client_fd, msg, strlen(msg));
         }
 
         printf("[PID %d] Received: %s\n", child_pid, buffer);
-
-        char reply[BUF_SIZE];
-        snprintf(reply, sizeof(reply), "[PID %d] Echo: %s\n", child_pid, buffer);
-        write(client_fd, reply, strlen(reply));
     }
 
     printf("[PID %d] Client disconnected.\n", child_pid);
     close(client_fd);
     exit(0);
 }
-
 
 int main() {
     int server_fd, client_fd;
@@ -109,19 +184,16 @@ int main() {
 
         pid_t pid = fork();
         if (pid == 0) {
-            // Child process
-            close(server_fd); 
+            close(server_fd);
 
-            // Send welcome message
             char welcome_msg[BUF_SIZE];
-            snprintf(welcome_msg, sizeof(welcome_msg), "Welcome! You are connected to the server. [PID %d]\n", getpid());
+            snprintf(welcome_msg, sizeof(welcome_msg), "Welcome! Connected to FTP-like server. [PID %d]\n", getpid());
             write(client_fd, welcome_msg, strlen(welcome_msg));
             handle_client(client_fd);
         }
         else if (pid > 0) {
-            // Parent process
             printf("Spawned child process. PID: %d\n", pid);
-            close(client_fd); 
+            close(client_fd);
         }
         else {
             perror("fork");
