@@ -1,0 +1,133 @@
+HTTP Protocol (Hypertext Transfer Protocol)
+*********************************************************************************************************************************************
+
+==============
+What is HTTP
+==============
+
+- HTTP = Hypertext Transfer Protocol
+- It is the application layer protocol that powers the web.
+- Runs on top of TCP/IP (reliable transport).
+- Stateless protocol → Each request/response is independent (server doesn’t remember previous requests).
+
+=================
+Features of HTTP
+=================
+
+1. Client-Server model
+- Client (e.g., browser) sends request.
+- Server (e.g., Apache, Nginx, or your C program) sends response.
+
+2. Stateless
+- Every request is new; server doesn’t remember old ones (though cookies/sessions can add “state”).
+
+3. Text-based & Human-readable
+- Messages are plain ASCII text.
+
+4. Extensible
+- Uses headers to add metadata (content type, language, encoding, etc.).
+
+=============
+HTTP Request
+=============
+
+An HTTP request has three parts:
+
+1. Request Line
+
+<Method> <Resource/Path> <Version>
+
+-Method → GET, POST, PUT, DELETE, etc.
+-Resource → What the client wants (/index.html, /api/data).
+-Version → HTTP/1.0, HTTP/1.1, HTTP/2.
+
+2. Headers
+
+-Provide extra info (which host, browser type, accepted content).
+
+3. Body (Optional)
+
+-Only present in methods like POST, PUT.
+
+
+==============
+HTTP Response
+==============
+
+An HTTP response also has three parts:
+
+1. Status Line
+
+<Version> <Status Code> <Status Message>
+
+2. Header
+
+3. Body
+
+====================
+Common HTTP Methods
+====================
+
+GET → Request data (default in browsers).
+POST → Send data to server (e.g., forms, login).
+PUT → Update existing resource.
+DELETE → Remove a resource.
+HEAD → Like GET but no body (just headers).
+
+
+=========================
+Common HTTP Status Codes
+=========================
+
+200 OK → Success
+301 Moved Permanently → Redirect
+400 Bad Request → Client error (invalid request)
+401 Unauthorized → Requires login
+403 Forbidden → Access denied
+404 Not Found → Resource doesn’t exist
+500 Internal Server Error → Server crashed
+
+==============
+HTTP Versions
+==============
+
+1. HTTP/1.0
+-Each request = new TCP connection.
+
+2. HTTP/1.1
+-Default today.
+-Persistent connections (multiple requests on same connection).
+
+3. HTTP/2
+-Binary, faster, supports multiplexing.
+
+4. HTTP/3
+-Uses QUIC protocol (based on UDP).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

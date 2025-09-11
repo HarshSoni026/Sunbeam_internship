@@ -1,0 +1,44 @@
+Difference Between FTP and HTTP
+*********************************************************************************************************************************************
+
+HTTP:
+
+-Hypertext Transfer Protocol.
+-Designed for transferring hypertext documents (HTML, images, JSON, etc.) used by the web.
+-Stateless → Each request is independent (server doesn’t remember past requests).
+-Uses single connection for both request and response (usually TCP port 80).
+-Default: 80 (HTTP), 443 (HTTPS).
+-HTTP methods: GET, POST, PUT, DELETE, HEAD.
+-Transfers documents/data (HTML, CSS, JSON, images, etc.).
+-Authentication optional (via headers: cookies, tokens, Basic Auth).
+-HTTP also insecure, but HTTPS (HTTP + SSL/TLS) provides encryption.
+-Browsing websites, accessing web APIs, loading web apps.
+
+
+FTP:
+
+-File Transfer Protocol.
+-Designed specifically for file transfer (upload/download).
+-Stateful → Keeps a session between client and server.
+-Uses two connections:
+1. Control connection (commands like USER, PASS, LIST).
+2. Data connection (actual file transfer).
+-Default: 21 (control), 20 (data).
+-ASCII-based commands: USER, PASS, LIST, RETR, STOR.
+-Transfers raw files (binary or ASCII).
+-Usually requires login (USER, PASS).
+-Plain FTP = insecure (credentials in plain text).
+-Uploading/downloading files to/from a server (e.g., website hosting, backups).
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+Quick Refresher: TCP Sockets
+=========================================================================================================
+
+A socket is an endpoint of a two-way communication link between two programs running on a network.
+
+It is identified by:
+(IP Address + Port Number + Protocol)
+
+
+=======================
+Socket Functions in C:
+=======================
+
+Server side:
+-------------
+
+socket() → Create a socket.
+
+bind() → Bind socket to an IP address and port.
+
+listen() → Put the socket in listening mode (waiting for clients).
+
+accept() → Accept a new client connection.
+
+recv() / send() → Exchange data.
+
+close() → Close the connection.
+
+
+Client side:
+-------------
+
+socket() → Create a socket.
+
+connect() → Connect to server (IP, port).
+
+send() / recv() → Exchange data.
+
+close() → Close connection.
