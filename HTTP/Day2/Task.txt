@@ -1,0 +1,21 @@
+Tasks:
+
+Serving Files & Error Handling
+
+Topics to Cover
+
+- Mapping URL → local file (/index.html → ./index.html).
+- File I/O in C (open, read, send).
+- Error handling (404 Not Found).
+
+Student Tasks
+
+-Extend Day 1 server to:
+- Parse the requested path from GET /file.
+- Serve index.html if no path is given.
+- Respond with 404.html if file not found.
+
+Test in browser + curl:
+
+curl -v http://127.0.0.1:8080/index.html
+curl -v http://127.0.0.1:8080/doesnotexist.html
