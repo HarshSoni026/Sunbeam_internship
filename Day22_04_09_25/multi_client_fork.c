@@ -80,7 +80,7 @@ void store_file(int client_fd, const char *filename) {
 
     while ((n = read(client_fd, buffer, BUF_SIZE - 1)) > 0) {
         buffer[n] = '\0';
-        buffer[strcspn(buffer, "\r\n")] = 0; // remove CRLF
+        buffer[strcspn(buffer, "\r\n")] = 0; // Remove newline
 
         if (strcmp(buffer, ".") == 0) {
             break; // End of file data
@@ -118,19 +118,19 @@ void handle_client(int client_fd) {
             send_file(client_fd, filename);
         }
 
-        // ---- LIST ----
+        // LIST 
         else if (strcasecmp(buffer, "LIST") == 0) {
             list_files(client_fd);
         }
 
-        // ---- STOR filename ----
+        //  STOR filename 
         else if (strncasecmp(buffer, "STOR", 4) == 0) {
             char *filename = buffer + 4;   // point just after "STOR"
             while (*filename == ' ') filename++; // skip spaces
 
             if (*filename == '\0') {
             // no filename provided
-            write(client_fd, "501 Syntax error in parameters\r\n", 32);
+            write(client_fd, "501 Syntax error in   parameters\r\n", 32);
     } 
     else {
         store_file(client_fd, filename);
@@ -180,7 +180,7 @@ int main() {
 
     while (1) {
         client_fd = accept(server_fd, (struct sockaddr*)&client_addr, &client_len);
-        if (client_fd < 0) { perror("accept"); continue; }
+        if (client_fd < 0) { perror("accept failed"); continue; }
 
         pid_t pid = fork();
         if (pid == 0) {

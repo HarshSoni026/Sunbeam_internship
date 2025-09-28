@@ -71,7 +71,7 @@ int main()
             printf("Client requested to close the connection.\n");
             break;
         }
-         printf("Client says: %s\n", buffer);
+        printf("Client says: %s\n", buffer);
     }
 
     close(client_fd);

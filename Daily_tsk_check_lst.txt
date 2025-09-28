@@ -72,12 +72,12 @@ Task 4: File Append (Bonus Challenge)                                           
 - Hint: Use O_APPEND flag when opening the file.
 
 Date:- 01/09/25
-Task 1: Integration
+Task 1: Integration                                                                                  - Done
 Prepare:
 Skeleton of full server code.
 Sample test script.
 
-Task 2: Multi-client Handling
+Task 2: Multi-client Handling                                                                        - Done
 Prepare:
 Fork-based or pthread-based template.(Check which one would be better to implement).
 

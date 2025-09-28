@@ -66,7 +66,7 @@ int main()
             printf("Client disconnected or error occurred.\n");
             break;
         }
-         printf("Client says: %s\n", buffer);
+        printf("Client says: %s\n", buffer);
     }
 
     close(client_fd);
