@@ -1,0 +1,11 @@
+Tasks:
+
+Multi-Client
+1. Improve logging: add client IP + timestamp.
+2. Serve actual files instead of fixed response.
+3. Run 3 curl requests simultaneously and verify in access.log.
+
+
+Post
+1. Extend logging to include request method (GET/POST).
+2. Add support for .css files with proper Content-Type.

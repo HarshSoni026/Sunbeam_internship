@@ -1,0 +1,6 @@
+Tasks:
+
+
+1. Add UART menu: 1 = LED ON, 0 = LED OFF. (In uart_basic)
+2. Change frequency (100ms).
+3. Implement software stopwatch using button.

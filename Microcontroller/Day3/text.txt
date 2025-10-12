@@ -1,0 +1,4 @@
+Task:
+
+
+1. Implement UART command SET TIME HH:MM:SS

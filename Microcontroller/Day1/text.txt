@@ -1,0 +1,6 @@
+Tasks:
+
+
+Modify code to blink different LEDs at different rates.
+
+Add button-controlled buzzer output.
