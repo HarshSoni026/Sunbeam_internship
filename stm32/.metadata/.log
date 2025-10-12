@@ -1,0 +1,27 @@
+!SESSION 2025-10-12 18:52:47.965 -----------------------------------------------
+eclipse.buildId=Version 1.13.2
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -data /home/sunbeam/CDAC/Sunbeam_internship/stm32 -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-10-12 18:52:51.401
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-10-12 18:52:51.402
+!MESSAGE Log4j2 initialized with config file /home/sunbeam/CDAC/Sunbeam_internship/stm32/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-10-12 18:52:53.977
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-10-12 18:54:47.461
+!MESSAGE Indexed 'led_blink' (22 sources, 82 headers) in 2.26 sec: 4,991 declarations; 26,444 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0064%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-10-12 19:12:13.126
+!MESSAGE Indexed 'uartandtimer' (22 sources, 82 headers) in 1.04 sec: 4,991 declarations; 26,444 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0064%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-10-12 19:56:49.000
+!MESSAGE Indexed 'accelerometer' (22 sources, 82 headers) in 1.42 sec: 4,991 declarations; 26,444 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0064%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-10-12 20:08:07.090
+!MESSAGE Indexed 'sdcard' (22 sources, 82 headers) in 1.49 sec: 4,991 declarations; 26,444 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0064%)

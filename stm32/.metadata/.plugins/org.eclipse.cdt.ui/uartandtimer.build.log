@@ -1,0 +1,10 @@
+20:06:53 **** Incremental Build of configuration Debug for project uartandtimer ****
+make -j12 all 
+arm-none-eabi-size   uartandtimer.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12712	    104	   1984	  14800	   39d0	uartandtimer.elf
+Finished building: default.size.stdout
+ 
+
+20:06:53 Build Finished. 0 errors, 0 warnings. (took 362ms)
+
