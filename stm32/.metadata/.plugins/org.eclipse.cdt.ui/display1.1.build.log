@@ -1,0 +1,10 @@
+20:27:04 **** Incremental Build of configuration Debug for project display1.1 ****
+make -j12 all 
+arm-none-eabi-size   display1.1.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13468	    112	   2016	  15596	   3cec	display1.1.elf
+Finished building: default.size.stdout
+ 
+
+20:27:05 Build Finished. 0 errors, 0 warnings. (took 363ms)
+

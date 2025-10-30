@@ -1,0 +1,54 @@
+/*
+ * KEYPAD.c
+ *
+ *  Created on: Oct 22, 2025
+ *      Author: sunbeam
+ */
+
+
+#include "KEYPAD.h"
+#include "KEYPAD_cfg.h"
+
+typedef struct {
+	uint8_t* KEY_States;
+}KEYPAD_info;
+
+static KEYPAD_info gs_KEYPAD_info[KEYPAD_UNITS] = {0};
+
+void KEYPAD_Init(uint16_t au16_Instance, uint8_t* au8_KeyStates){
+	uint8_t i = 0;
+	GPIO_InitTypeDef GPIO_InitStruct = {0};
+	if(au8_KeyStates != NULL){
+		gs_KEYPAD_info[au16_Instance].KEY_States = au8_KeyStates;
+
+	}
+	else{
+		return;
+	}
+
+	for(int i = 0; i < ROWS; i++){
+		if(KEYPAD_CfgParam[au16_Instance].ROW_GPIO[i] == GPIOA){
+			__HAL_RCC_GPIOA_CLK_ENABLE();
+		}
+		else if(KEYPAD_CfgParam[au16_Instance].ROW_GPIO[i] == GPIOB){
+			__HAL_RCC_GPIOB_CLK_ENABLE();
+		}
+		else if(KEYPAD_CfgParam[au16_Instance].ROW_GPIO[i] == GPIOC){
+			__HAL_RCC_GPIOC_CLK_ENABLE();
+		}
+		else if(KEYPAD_CfgParam[au16_Instance].ROW_GPIO[i] == GPIOD){
+			__HAL_RCC_GPIOD_CLK_ENABLE();
+		}
+		else if(KEYPAD_CfgParam[au16_Instance].ROW_GPIO[i] == GPIOE){
+			__HAL_RCC_GPIOE_CLK_ENABLE();
+		}
+		GPIO_InitStruct.Pin = KEYPAD_CfgParam[au16_Instance].ROW_PIN[i];
+		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+		GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+		HAL_GPIO_Init(KEYPAD_CfgParam[au16_Instance].ROW_GPIO[i], &GPIO_InitStruct);
+	}
+	for(i = 0; i < ROWS; i++){
+
+	}
+
+}
